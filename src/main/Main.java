@@ -14,11 +14,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+import static javafx.geometry.Pos.TOP_CENTER;
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+public class Main extends Application {
 
     public void start (Stage stage){
 
@@ -81,13 +79,12 @@ public class Main extends Application {
         divideButton.setMaxSize(100, 100);
         divideButton.setMinSize(100, 100);
 
-        Button clearButton = new Button("Clear");
+        Button clearButton = new Button();
+        clearButton.setText("Clear");
 
         clearButton.setStyle("-fx-font-size: 48; -fx-background-color: #d97a53; -fx-text-fill: #2c3531;");
-        clearButton.setMaxSize(100, 100);
-        clearButton.setMinSize(100, 100);
-
-        clearButton.setMaxWidth(Double.MAX_VALUE);
+        clearButton.setMaxSize(225, 100);
+        clearButton.setMinSize(225, 100);
 
         // GridPane --->
         GridPane gridPane = new GridPane();
@@ -107,7 +104,8 @@ public class Main extends Application {
         gridPane.setHgap(25);
         gridPane.setVgap(25);
 
-        gridPane.setStyle(String.format("-fx-translate-x: %s;", 50));
+        gridPane.setAlignment(TOP_CENTER);
+
         gridPane.add(plusButton,0,0);
         gridPane.add(minusButton,1,0);
         gridPane.add(multiplyButton,2,0);
@@ -119,10 +117,10 @@ public class Main extends Application {
 
         borderPane.setTop(inputField);
         BorderPane.setMargin(inputField, new Insets(0,0,75,0));
-        borderPane.setAlignment(inputField, Pos.TOP_LEFT);
+        BorderPane.setAlignment(inputField, Pos.TOP_LEFT);
 
         borderPane.setBottom(labelHBox);
-        borderPane.setAlignment(labelHBox, Pos.BOTTOM_CENTER);
+        BorderPane.setAlignment(labelHBox, Pos.BOTTOM_CENTER);
 
         typeLabel.setStyle("-fx-text-size: 12; -fx-text-fill: white;");
 
@@ -140,9 +138,13 @@ public class Main extends Application {
                     keyEvent.consume();
                     break;
                 case ESCAPE:
-                    if (keyEvent.isShiftDown() || keyEvent.isControlDown()){
+                    if (keyEvent.isShiftDown() || keyEvent.isControlDown()) {
                         Platform.exit();
                     }
+                    break;
+                case TAB:
+                    keyEvent.consume();
+                    break;
             }
         });
 
