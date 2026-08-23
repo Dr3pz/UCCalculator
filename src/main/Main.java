@@ -14,10 +14,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-import javax.swing.*;
-import java.security.Key;
-import java.util.stream.Stream;
-
 public class Main extends Application {
 
     public static void main(String[] args) {
@@ -151,10 +147,10 @@ public class Main extends Application {
         });
 
         // Button logic --->
-        ButtonOperation(plusButton, inputField, "+", maxLengthInputField);
-        ButtonOperation(minusButton, inputField, "-", maxLengthInputField);
-        ButtonOperation(multiplyButton, inputField, "*", maxLengthInputField);
-        ButtonOperation(divideButton, inputField, "/", maxLengthInputField);
+        ButtonOperation(plusButton, inputField, "+");
+        ButtonOperation(minusButton, inputField, "-");
+        ButtonOperation(multiplyButton, inputField, "*");
+        ButtonOperation(divideButton, inputField, "/");
 
         clearButton.setOnAction(event -> {
             inputField.clear();
@@ -167,7 +163,7 @@ public class Main extends Application {
         stage.show();
     }
 
-    private void ButtonOperation(Button currentButton, TextField inputField, String insertSymbol, int maxLengthInputField) {
+    private void ButtonOperation(Button currentButton, TextField inputField, String insertSymbol) {
         currentButton.setFocusTraversable(false);
 
         currentButton.setOnAction(event -> {
