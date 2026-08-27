@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Default" type="Application" factoryName="Application">
+    <option name="ALTERNATIVE_JRE_PATH" value="$PROJECT_DIR$/../../../../Program Files/Amazon Corretto/jdk17.0.20_10" />
+    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+    <option name="MAIN_CLASS_NAME" value="main.Main" />
+    <module name="UCCalculator" />
+    <option name="VM_PARAMETERS" value="--module-path &quot;C:\Program Files\Amazon Corretto\javafx-sdk-17.0.20\lib&quot; --add-modules javafx.controls,javafx.fxml -Dprism.allowhidpi=false" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
