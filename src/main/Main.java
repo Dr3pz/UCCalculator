@@ -26,7 +26,7 @@ public class Main extends Application {
         // Add variables --->
         int maxLengthInputField = 32;
 
-        String currentVersion = "1.3";
+        String currentVersion = "1.3.1";
 
         String backgroundColorScene = "#017200";
 
@@ -88,51 +88,94 @@ public class Main extends Application {
 
         // Add Buttons --->
 
-        Button zeroButton = CreateButton("0", "-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s", buttonOperationColor, buttonOperationTextColor, inputField);
+        Button[] emptyButtons = new Button[5];
 
-        Button oneButton = CreateButton("1", "-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s", buttonOperationColor, buttonOperationTextColor, inputField);
+        for (int i = 0; i < emptyButtons.length; i++) {
+            emptyButtons[i] = buttonEmptyCreate("-fx-background-color: %s;",  buttonOperationColor);
+        }
 
-        Button twoButton = CreateButton("2", "-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s", buttonOperationColor, buttonOperationTextColor, inputField);
+        Button zeroButton = buttonCreate("0", "-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s;", buttonOperationColor, buttonOperationTextColor, inputField, currentCharLabel);
 
-        Button threeButton = CreateButton("3", "-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s", buttonOperationColor, buttonOperationTextColor, inputField);
+        Button oneButton = buttonCreate("1", "-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s;", buttonOperationColor, buttonOperationTextColor, inputField, currentCharLabel);
 
-        Button fourButton = CreateButton("4", "-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s", buttonOperationColor, buttonOperationTextColor, inputField);
+        Button twoButton = buttonCreate("2", "-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s;", buttonOperationColor, buttonOperationTextColor, inputField, currentCharLabel);
 
-        Button fiveButton = CreateButton("5", "-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s", buttonOperationColor, buttonOperationTextColor, inputField);
+        Button threeButton = buttonCreate("3", "-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s;", buttonOperationColor, buttonOperationTextColor, inputField, currentCharLabel);
 
-        Button sixButton = CreateButton("6", "-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s", buttonOperationColor, buttonOperationTextColor, inputField);
+        Button fourButton = buttonCreate("4", "-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s;", buttonOperationColor, buttonOperationTextColor, inputField, currentCharLabel);
 
-        Button sevenButton = CreateButton("7", "-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s", buttonOperationColor, buttonOperationTextColor, inputField);
+        Button fiveButton = buttonCreate("5", "-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s;", buttonOperationColor, buttonOperationTextColor, inputField, currentCharLabel);
 
-        Button eightButton = CreateButton("8", "-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s", buttonOperationColor, buttonOperationTextColor, inputField);
+        Button sixButton = buttonCreate("6", "-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s;", buttonOperationColor, buttonOperationTextColor, inputField, currentCharLabel);
 
-        Button nineButton = CreateButton("9", "-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s", buttonOperationColor, buttonOperationTextColor, inputField);
+        Button sevenButton = buttonCreate("7", "-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s;", buttonOperationColor, buttonOperationTextColor, inputField, currentCharLabel);
 
-        Button plusButton = CreateButton("+", "-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s", buttonOperationColor, buttonOperationTextColor, inputField);
+        Button eightButton = buttonCreate("8", "-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s;", buttonOperationColor, buttonOperationTextColor, inputField, currentCharLabel);
 
-        Button minusButton = CreateButton("-", "-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s", buttonOperationColor, buttonOperationTextColor, inputField);
+        Button nineButton = buttonCreate("9", "-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s;", buttonOperationColor, buttonOperationTextColor, inputField, currentCharLabel);
 
-        Button multiplyButton = CreateButton("*", "-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s", buttonOperationColor, buttonOperationTextColor, inputField);
+        Button plusButton = buttonCreate("+", "-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s;", buttonOperationColor, buttonOperationTextColor, inputField, currentCharLabel);
 
-        Button divideButton = CreateButton("/", "-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s", buttonOperationColor, buttonOperationTextColor, inputField);
+        Button minusButton = buttonCreate("-", "-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s;", buttonOperationColor, buttonOperationTextColor, inputField, currentCharLabel);
+
+        Button multiplyButton = buttonCreate("*", "-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s;", buttonOperationColor, buttonOperationTextColor, inputField, currentCharLabel);
+
+        Button divideButton = buttonCreate("/", "-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s;", buttonOperationColor, buttonOperationTextColor, inputField, currentCharLabel);
+
+        Button dotButton = buttonCreate(".", "-fx-font-size: 32; -fx-background-color: %s; -fx-text-fill: %s; -fx-padding: -7.5 0 7.5 0;", buttonOperationColor, buttonOperationTextColor, inputField, currentCharLabel);
 
         Button submitButton = new Button("SUBMIT");
         submitButton.setStyle(String.format("-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s;", buttonSubmitColor, buttonSubmitTextColor));
         submitButton.setFocusTraversable(false);
         submitButton.setOnAction(event -> {
-            inputField.setText(ParserExpression(inputField.getText()));
-            CaretReturnOnEnd(inputField);
+            charLabelUpdate(currentCharLabel, submitButton.getText());
+
+            inputField.setText(parserExpression(inputField.getText()));
+            caretReturnOnEnd(inputField);
         });
 
         Button cancelButton = new Button("CANCEL");
         cancelButton.setStyle(String.format("-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s;", buttonCancelColor, buttonCancelTextColor));
         cancelButton.setOnAction(event -> {
+            charLabelUpdate(currentCharLabel, cancelButton.getText());
+
             inputField.clear();
             inputField.requestFocus();
         });
 
+        Button backspaceButton = new Button("⌫");
+        backspaceButton.setStyle(String.format("-fx-font-size: 18; -fx-background-color: %s; -fx-text-fill: %s;", buttonCancelColor, buttonCancelTextColor));
+        backspaceButton.setFocusTraversable(false);
+        backspaceButton.setOnAction(event -> {
+            charLabelUpdate(currentCharLabel, backspaceButton.getText());
+
+            if (!inputField.getText().isBlank())
+            {
+                StringBuilder resultUpdate = new StringBuilder();
+                int currentCaretPosition = inputField.getCaretPosition();
+                for (int i = 0; i < inputField.getLength() - 1; i++) {
+                    if (i != currentCaretPosition) {
+                        resultUpdate.append(inputField.getText().charAt(i));
+                    }
+                }
+                inputField.setText(resultUpdate.toString());
+                caretReturnOnEnd(inputField);
+            }
+        });
+
         // Add GridPane --->
         GridPane gridPane = new GridPane();
+
+        // first value - column; second value - line;
+
+        gridPane.add(emptyButtons[0], 2, 0);
+        emptyButtons[0].setPrefSize(50, 50);
+
+        gridPane.add(emptyButtons[1], 3, 0, 2, 1);
+        emptyButtons[1].setPrefSize(125, 50);
+
+        gridPane.add(emptyButtons[2], 3, 1, 2, 1);
+        emptyButtons[2].setPrefSize(125, 50);
 
         gridPane.add(zeroButton,3,2);
         zeroButton.setPrefSize(50,50);
@@ -170,17 +213,23 @@ public class Main extends Application {
         gridPane.add(minusButton,1,0);
         minusButton.setPrefSize(50,50);
 
-        gridPane.add(multiplyButton,2,0);
+        gridPane.add(multiplyButton,0,1);
         multiplyButton.setPrefSize(50,50);
 
-        gridPane.add(divideButton,3,0);
+        gridPane.add(divideButton,1,1);
         divideButton.setPrefSize(50,50);
 
-        gridPane.add(submitButton,0,1,2,1);
+        gridPane.add(dotButton,2,1);
+        dotButton.setPrefSize(50,50);
+
+        gridPane.add(submitButton,3,3,2,1);
         submitButton.setPrefSize(125,50);
 
-        gridPane.add(cancelButton,2,1,2,1);
+        gridPane.add(cancelButton,3,4,2,1);
         cancelButton.setPrefSize(125,50);
+
+        gridPane.add(backspaceButton,4,2);
+        backspaceButton.setPrefSize(50,50);
 
         gridPane.setHgap(25);
         gridPane.setVgap(25);
@@ -204,7 +253,7 @@ public class Main extends Application {
 
         // Key reader/parser --->
         scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            currentCharLabel.setText(String.format("CHAR: %S", event.getCode().toString()));
+            charLabelUpdate(currentCharLabel, event.getCode().toString());
 
             switch (event.getCode()) {
                 case ENTER:
@@ -231,8 +280,8 @@ public class Main extends Application {
 
     }
 
-    // EN: parsing expression // RU: парсинг выражения --->
-    private String ParserExpression(String inputValue) {
+    // EN: parsing expression --->
+    private String parserExpression(String inputValue) {
         String allowedCharacters = "0123456789+-*/.";
         String allowedStartCharacters = "+-";
         DecimalFormatSymbols symbols = new DecimalFormatSymbols();
@@ -263,7 +312,18 @@ public class Main extends Application {
         if (inputValue.isBlank()) {
             return inputValue;
         }
-        if ((!Character.isDigit(inputValue.charAt(0)) || !allowedStartCharacters.contains(inputValue.substring(0, 1))) && !Character.isDigit(inputValue.charAt(inputValue.length() - 1))) {
+
+        boolean isFirstCharDigit = Character.isDigit(inputValue.charAt(0));
+        boolean isLastCharDigit = Character.isDigit(inputValue.charAt(inputValue.length() - 1));
+        boolean isFirstCharAllowedSymbol = allowedStartCharacters.contains(inputValue.substring(0, 1));
+        boolean isFirstCharDot = ".".contains(inputValue.substring(0, 1));
+        boolean isLastCharDot =  ".".contains(inputValue.substring(inputValue.length() - 1));
+
+        //System.out.println(!isFirstCharDigit && !isFirstCharAllowedSymbol && !isFirstCharDot);
+        //System.out.println(!isLastCharDigit && !isLastCharDot);
+        // TRUE - ERROR          FALSE - CONTINUE
+
+        if ((!isFirstCharDigit && !isFirstCharAllowedSymbol && !isFirstCharDot) || (!isLastCharDigit && !isLastCharDot)) {
             return errorInvalidMessage;
         }
 
@@ -274,7 +334,7 @@ public class Main extends Application {
         }
 
         // Tokenization --->
-        /* logic tokenization
+        /* logic tokenization RU
         1. Перебираем char inputValue
         2. Если текущий char - digit, то добавляем его в сборочную строку,
          когда текущий символ !char, то обрываем запись числа
@@ -288,13 +348,14 @@ public class Main extends Application {
 
         for (int i = 0; i < inputValue.length(); i++) {
             Character currentChar = inputValue.charAt(i);
+
             if (i == 0 && allowedStartCharacters.contains(currentChar.toString())) {
                 tokens.add("0");
                 tokens.add(currentChar.toString());
             } else if (Character.isDigit(currentChar)) {
                 token.append(currentChar);
             } else if (currentChar == '.') {
-                if (!token.isEmpty() && !token.toString().contains(".")) {
+                if (!token.toString().contains(".")) {
                     token.append(currentChar);
                 } else {
                     return errorInvalidMessage;
@@ -377,18 +438,20 @@ public class Main extends Application {
         }
     }
 
-    private Button CreateButton(String textOperation, String buttonStyle, String buttonOperationColor, String buttonOperationTextColor, TextField inputField) {
+    private Button buttonCreate(String textOperation, String buttonStyle, String buttonOperationColor, String buttonOperationTextColor, TextField inputField, Label currentCharLabel) {
         Button buttonName = new Button(textOperation);
         buttonName.setStyle(String.format(buttonStyle, buttonOperationColor, buttonOperationTextColor));
-        ButtonOperation(buttonName, inputField, buttonName.getText());
+        buttonOperation(buttonName, inputField, buttonName.getText(), currentCharLabel);
         return buttonName;
     }
 
-    private void ButtonOperation(Button currentButton, TextField inputField, String insertSymbol) {
+    private void buttonOperation(Button currentButton, TextField inputField, String insertSymbol, Label currentCharLabel) {
 
         currentButton.setFocusTraversable(false);
 
         currentButton.setOnAction(event -> {
+            charLabelUpdate(currentCharLabel, insertSymbol);
+
             int oldLength = inputField.getLength();
             int currentCaretPosition = inputField.getCaretPosition();
 
@@ -403,7 +466,17 @@ public class Main extends Application {
         });
     }
 
-    private void CaretReturnOnEnd(TextField textField) {
+    private Button buttonEmptyCreate (String buttonStyle, String buttonColor) {
+        Button buttonName = new Button();
+        buttonName.setStyle(String.format(buttonStyle, buttonColor));
+        return buttonName;
+    }
+
+    private void charLabelUpdate(Label CharLabel, String inputField) {
+        CharLabel.setText(String.format("CHAR: %s", inputField));
+    }
+
+    private void caretReturnOnEnd(TextField textField) {
         textField.positionCaret(textField.getLength());
         textField.requestFocus();
     }
