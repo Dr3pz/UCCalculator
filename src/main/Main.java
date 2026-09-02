@@ -26,7 +26,7 @@ public class Main extends Application {
         // Add variables --->
         int maxLengthInputField = 32;
 
-        String currentVersion = "1.3.1";
+        String currentVersion = "1.3.2";
 
         String backgroundColorScene = "#017200";
 
@@ -381,16 +381,16 @@ public class Main extends Application {
 
             switch (tokens.get(i)) {
                 case "*":
-                    Double firstOperandMultiplication = Double.parseDouble(tokens.get(i - 1));
-                    Double secondOperandMultiplication = Double.parseDouble(tokens.get(i + 1));
+                    double firstOperandMultiplication = Double.parseDouble(tokens.get(i - 1));
+                    double secondOperandMultiplication = Double.parseDouble(tokens.get(i + 1));
                     tokens.set(i - 1, String.valueOf(firstOperandMultiplication * secondOperandMultiplication));
                     tokens.remove(i + 1);
                     tokens.remove(i);
                     i--;
                     break;
                 case "/":
-                    Double firstOperandDivide = Double.parseDouble(tokens.get(i - 1));
-                    Double secondOperandDivide = Double.parseDouble(tokens.get(i + 1));
+                    double firstOperandDivide = Double.parseDouble(tokens.get(i - 1));
+                    double secondOperandDivide = Double.parseDouble(tokens.get(i + 1));
                     if (secondOperandDivide != 0) {
                         tokens.set(i - 1, String.valueOf(firstOperandDivide / secondOperandDivide));
                         tokens.remove(i + 1);
@@ -407,16 +407,16 @@ public class Main extends Application {
 
             switch (tokens.get(i)) {
                 case "+":
-                    Double firstOperandPlus = Double.parseDouble(tokens.get(i - 1));
-                    Double secondOperandPlus = Double.parseDouble(tokens.get(i + 1));
+                    double firstOperandPlus = Double.parseDouble(tokens.get(i - 1));
+                    double secondOperandPlus = Double.parseDouble(tokens.get(i + 1));
                     tokens.set(i - 1, String.valueOf(firstOperandPlus + secondOperandPlus));
                     tokens.remove(i + 1);
                     tokens.remove(i);
                     i--;
                     break;
                 case  "-":
-                    Double firstOperandMinus = Double.parseDouble(tokens.get(i - 1));
-                    Double secondOperandMinus = Double.parseDouble(tokens.get(i + 1));
+                    double firstOperandMinus = Double.parseDouble(tokens.get(i - 1));
+                    double secondOperandMinus = Double.parseDouble(tokens.get(i + 1));
                     tokens.set(i - 1, String.valueOf(firstOperandMinus - secondOperandMinus));
                     tokens.remove(i + 1);
                     tokens.remove(i);
@@ -426,7 +426,7 @@ public class Main extends Application {
         }
 
         // Return --->
-        Double finalValue = Double.parseDouble(tokens.get(0));
+        double finalValue = Double.parseDouble(tokens.get(0));
         if (!Double.isInfinite(finalValue)) {
             String resultValue = decimalFormat.format(finalValue);
             resultValue = resultValue.replaceAll("\\.+", ",");
