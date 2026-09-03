@@ -26,25 +26,25 @@ public class Main extends Application {
         // Add variables --->
         int maxLengthInputField = 32;
 
-        String currentVersion = "1.3.2";
+        String currentVersion = "1.3.3";
 
-        String backgroundColorScene = "#017200";
+        String backgroundColorScene = "#FFFFFF";
 
-        String inputFieldBackgroundColor = "#3E2723";
-        String inputFieldTextColor = "#FFE0B2";
+        String inputFieldBackgroundColor = "#999999";
+        String inputFieldTextColor = "#FFFFFF";
 
-        String buttonOperationColor = "#D35400";
+        String buttonOperationColor = "#d3d3d3";
         String buttonOperationTextColor = "#1A0F0A";
 
-        String buttonSubmitColor = "#A04000";
-        String buttonSubmitTextColor = "#1A0F0A";
+        String buttonSubmitColor = "#2a78d5";
+        String buttonSubmitTextColor = "#000000";
 
-        String buttonCancelColor = "#A04000";
-        String buttonCancelTextColor = "#1A0F0A";
+        String buttonCancelColor = "#2a78d5";
+        String buttonCancelTextColor = "#000000";
 
         // Window size --->
-        stage.setWidth(400);
-        stage.setHeight(600);
+        stage.setWidth(305);
+        stage.setHeight(413);
         stage.setResizable(false);
 
         // Add node --->
@@ -122,6 +122,10 @@ public class Main extends Application {
 
         Button divideButton = buttonCreate("/", "-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s;", buttonOperationColor, buttonOperationTextColor, inputField, currentCharLabel);
 
+        Button powerButton = buttonCreate("^", "-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s;", buttonOperationColor, buttonOperationTextColor, inputField, currentCharLabel);
+
+        Button rootButton = buttonCreate("√", "-fx-font-size: 24; -fx-background-color: %s; -fx-text-fill: %s;", buttonOperationColor, buttonOperationTextColor, inputField, currentCharLabel);
+
         Button dotButton = buttonCreate(".", "-fx-font-size: 32; -fx-background-color: %s; -fx-text-fill: %s; -fx-padding: -7.5 0 7.5 0;", buttonOperationColor, buttonOperationTextColor, inputField, currentCharLabel);
 
         Button submitButton = new Button("SUBMIT");
@@ -168,14 +172,8 @@ public class Main extends Application {
 
         // first value - column; second value - line;
 
-        gridPane.add(emptyButtons[0], 2, 0);
-        emptyButtons[0].setPrefSize(50, 50);
-
-        gridPane.add(emptyButtons[1], 3, 0, 2, 1);
-        emptyButtons[1].setPrefSize(125, 50);
-
-        gridPane.add(emptyButtons[2], 3, 1, 2, 1);
-        emptyButtons[2].setPrefSize(125, 50);
+        gridPane.add(emptyButtons[0], 3, 0, 2, 1);
+        emptyButtons[0].setPrefSize(125, 50);
 
         gridPane.add(zeroButton,3,2);
         zeroButton.setPrefSize(50,50);
@@ -219,8 +217,14 @@ public class Main extends Application {
         gridPane.add(divideButton,1,1);
         divideButton.setPrefSize(50,50);
 
+        gridPane.add(rootButton,2,0);
+        rootButton.setPrefSize(50,50);
+
         gridPane.add(dotButton,2,1);
         dotButton.setPrefSize(50,50);
+
+        gridPane.add(powerButton,3,1);
+        powerButton.setPrefSize(50,50);
 
         gridPane.add(submitButton,3,3,2,1);
         submitButton.setPrefSize(125,50);
@@ -229,10 +233,10 @@ public class Main extends Application {
         cancelButton.setPrefSize(125,50);
 
         gridPane.add(backspaceButton,4,2);
-        backspaceButton.setPrefSize(50,50);
+        backspaceButton.setPrefSize(73,50);
 
-        gridPane.setHgap(25);
-        gridPane.setVgap(25);
+        gridPane.setHgap(2);
+        gridPane.setVgap(2);
 
         gridPane.setAlignment(Pos.TOP_CENTER);
 
@@ -240,7 +244,7 @@ public class Main extends Application {
         BorderPane borderPane = new BorderPane();
 
         borderPane.setTop(inputField);
-        BorderPane.setMargin(inputField, new Insets(0, 0, 50, 0));
+        BorderPane.setMargin(inputField, new Insets(0, 0, 3, 0));
 
         borderPane.setCenter(gridPane);
 
@@ -282,7 +286,7 @@ public class Main extends Application {
 
     // EN: parsing expression --->
     private String parserExpression(String inputValue) {
-        String allowedCharacters = "0123456789+-*/.";
+        String allowedCharacters = "0123456789+-*/.√^";
         String allowedStartCharacters = "+-";
         DecimalFormatSymbols symbols = new DecimalFormatSymbols();
 
@@ -301,6 +305,8 @@ public class Main extends Application {
         inputValue = inputValue.replaceAll("\\.+", ".");
         inputValue = inputValue.replaceAll("\\*+", "*");
         inputValue = inputValue.replaceAll("/+", "/");
+        inputValue = inputValue.replaceAll("√+", "√");
+        inputValue = inputValue.replaceAll("\\^+", "^");
 
         while (inputValue.contains("--") || inputValue.contains("+-") || inputValue.contains("-+") || inputValue.contains("++")) {
             inputValue = inputValue.replace("--", "+");
@@ -318,12 +324,13 @@ public class Main extends Application {
         boolean isFirstCharAllowedSymbol = allowedStartCharacters.contains(inputValue.substring(0, 1));
         boolean isFirstCharDot = ".".contains(inputValue.substring(0, 1));
         boolean isLastCharDot =  ".".contains(inputValue.substring(inputValue.length() - 1));
+        boolean isFirstCharRoot = "√".contains(inputValue.substring(0, 1));
 
         //System.out.println(!isFirstCharDigit && !isFirstCharAllowedSymbol && !isFirstCharDot);
         //System.out.println(!isLastCharDigit && !isLastCharDot);
         // TRUE - ERROR          FALSE - CONTINUE
 
-        if ((!isFirstCharDigit && !isFirstCharAllowedSymbol && !isFirstCharDot) || (!isLastCharDigit && !isLastCharDot)) {
+        if ((!isFirstCharDigit && !isFirstCharAllowedSymbol && !isFirstCharDot && !isFirstCharRoot) || (!isLastCharDigit && !isLastCharDot)) {
             return errorInvalidMessage;
         }
 
@@ -348,12 +355,13 @@ public class Main extends Application {
 
         for (int i = 0; i < inputValue.length(); i++) {
             Character currentChar = inputValue.charAt(i);
-
             if (i == 0 && allowedStartCharacters.contains(currentChar.toString())) {
                 tokens.add("0");
                 tokens.add(currentChar.toString());
             } else if (Character.isDigit(currentChar)) {
                 token.append(currentChar);
+            } else if (currentChar == '√') {
+                tokens.add(currentChar.toString());
             } else if (currentChar == '.') {
                 if (!token.toString().contains(".")) {
                     token.append(currentChar);
@@ -374,9 +382,27 @@ public class Main extends Application {
             tokens.add(token.toString());
         }
 
-        //System.out.println(tokens);
+        System.out.println(tokens);
 
         // Token reduction --->
+        for (int i = 0; i < tokens.size(); i++) {
+            switch (tokens.get(i)) {
+                case "^":
+                    double firstOperandPower = Double.parseDouble(tokens.get(i - 1));
+                    double secondOperandPower = Double.parseDouble(tokens.get(i + 1));
+                    tokens.set(i - 1, String.valueOf(Math.pow(firstOperandPower, secondOperandPower)));
+                    tokens.remove(i + 1);
+                    tokens.remove(i);
+                    i--;
+                    break;
+                case "√":
+                    double firstOperandRoot = Double.parseDouble(tokens.get(i + 1));
+                    tokens.set(i, String.valueOf(Math.sqrt(firstOperandRoot)));
+                    tokens.remove(i + 1);
+                    break;
+            }
+        }
+
         for (int i = 0; i < tokens.size(); i++) {
 
             switch (tokens.get(i)) {
